@@ -1,24 +1,27 @@
-# README
+#### `visit`
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- **書き方:** `visit '遷移したいページのパス'`
+- **実行される操作:** 指定したページに遷移する。
 
-Things you may want to cover:
+#### `click_link`
 
-* Ruby version
+- **書き方:** `click_link 'リンク文字列'`
+- **実行される操作:** 指定したリンク文字列を持つ `a` タグ（リンク）をクリックする。
 
-* System dependencies
+#### `fill_in`
 
-* Configuration
+- **書き方:** `fill_in 'ラベル文字列', with: '入力したい文字列'`
+- **実行される操作:** 「入力したい文字列」を指定のフォームに入力する。
 
-* Database creation
+#### `click_button`
 
-* Database initialization
+- **書き方:** `click_button 'ラベル文字列'`
+- **実行される操作:** 指定したラベルを持つボタンをクリックする。
 
-* How to run the test suite
+#### `page`
 
-* Services (job queues, cache servers, search engines, etc.)
+- **説明:** `visit` でアクセスした時、表示されるページの内容を取得する。
 
-* Deployment instructions
+#### `current_path`
 
-* ...
+- **説明:** 現在のパスを取得する。
