@@ -49,6 +49,11 @@
     <div class="bg-white p-6 shadow rounded mb-7">
       <h4 class="text-lg font-medium text-gray-800 mb-4">コメント一覧</h4>
 
+      <!-- コメント数バッジを追加 -->
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+        <%= @post.comments.size %>件
+      </span>
+
       <% if @post.comments.empty? %>
         <p class="text-gray-500 text-center py-4">まだコメントはありません。最初のコメントを投稿してみましょう！</p>
       <% else %>
