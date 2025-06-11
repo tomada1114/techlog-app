@@ -16,11 +16,29 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    # 実装は後のレッスンで行います
+    @comment = @post.comments.find(params[:id])
+
+    unless @comment.user == current_user
+      flash[:alert] = '他のユーザーのコメントは編集できません'
+      redirect_to post_path(@post)
+    end
   end
 
   def update
-    # 実装は後のレッスンで行います
+    @comment = @post.comments.find(params[:id])
+
+    if @comment.user == current_user
+      if @comment.update(comment_params)
+        flash[:notice] = 'コメントを更新しました'
+        redirect_to post_path(@post)
+      else
+        flash.now[:alert] = 'コメントの更新に失敗しました'
+        render :edit
+      end
+    else
+      flash[:alert] = '他のユーザーのコメントは編集できません'
+      redirect_to post_path(@post)
+    end
   end
 
   def destroy

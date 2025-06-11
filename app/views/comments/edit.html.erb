@@ -1,4 +1,21 @@
-<div>
-  <h1 class="font-bold text-4xl">Comments#edit</h1>
-  <p>Find me in app/views/comments/edit.html.erb</p>
+<div class="space-y-6 w-3/4 max-w-lg">
+  <div class="items-center justify-center">
+    <div class="bg-white p-6 shadow rounded">
+      <h2 class="text-xl font-bold text-gray-900 mb-4">コメントを編集</h2>
+
+      <%= form_with model: [@post, @comment], class: "space-y-4" do |f| %>
+        <div>
+          <%= f.label :content, "コメント内容", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.text_area :content,
+                rows: 4,
+                class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md p-2" %>
+        </div>
+
+        <div class="flex justify-end space-x-3">
+          <%= link_to "キャンセル", post_path(@post), class: "py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+          <%= f.submit "更新する", class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
