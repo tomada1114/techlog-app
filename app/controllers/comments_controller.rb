@@ -3,7 +3,16 @@ class CommentsController < ApplicationController
   before_action :set_post
 
   def create
-    # 実装は次のレッスンで行います
+    @comment = @post.comments.build(comment_params)
+    @comment.user = current_user
+
+    if @comment.save
+      flash[:notice] = 'コメントを投稿しました'
+      redirect_to post_path(@post)
+    else
+      flash[:alert] = 'コメントの投稿に失敗しました'
+      redirect_to post_path(@post)
+    end
   end
 
   def edit
