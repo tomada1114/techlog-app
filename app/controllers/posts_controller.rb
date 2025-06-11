@@ -24,6 +24,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by(id: params[:id])
+    @comment = Comment.new  # 新規コメント用のインスタンスを作成
   end
 
   def destroy

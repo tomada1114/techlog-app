@@ -1,27 +1,51 @@
 <div class="space-y-6 w-3/4 max-w-lg">
   <label class="block text-xl font-bold text-gray-700">学習ログ詳細</label>
+
   <div class="items-center justify-center">
     <div tabindex="0" aria-label="card 1" class="focus:outline-none mb-7 bg-white p-6 shadow rounded">
       <div class="flex items-center border-b border-gray-200 pb-6">
         <div class="flex items-start justify-between w-full">
           <div class="pl-3">
-            <p class="focus:outline-none text-lg font-medium leading-5 text-gray-800"><%= @post.title %></p>
-            <p class="focus:outline-none text-sm leading-normal pt-2 text-gray-500">
-              by <%= link_to @post.user.nickname, user_path(@post.user), class: "hover:text-indigo-600 hover:font-bold" %>
-            </p>
+            <h3 class="focus:outline-none text-lg font-medium leading-5 text-gray-800"><%= @post.title %></h3>
+            <p class="focus:outline-none text-sm leading-normal pt-2 text-gray-500">by <%= link_to @post.user.nickname, user_path(@post.user), class: "hover:text-indigo-600 hover:font-bold" %></p>
           </div>
-
           <% if user_signed_in? %>
-          <% if @post.user_id == current_user.id %>
-          <%= button_to "削除", post_path(@post), method: :delete, class: "text-sm bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-1 px-3 border border-blue-500 hover:border-transparent rounded hover:cursor-pointer" %>
+            <% if @post.user_id == current_user.id %>
+              <%= button_to "削除", post_path(@post), method: :delete, class: "text-sm bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-1 px-3 border border-blue-500 hover:border-transparent rounded hover:cursor-pointer" %>
+            <% end %>
           <% end %>
-          <% end %>
-
         </div>
       </div>
       <div class="px-2">
         <p class="focus:outline-none text-sm leading-5 py-4 text-gray-600"><%= @post.content %></p>
       </div>
     </div>
+
+    <!-- コメントフォームを追加 -->
+    <div class="bg-white p-6 shadow rounded mb-7">
+      <h4 class="text-lg font-medium text-gray-800 mb-4">コメントを投稿する</h4>
+
+      <% if user_signed_in? %>
+        <%= form_with(model: [@post, @comment], url: post_comments_path(@post), class: "space-y-4") do |f| %>
+          <div>
+            <%= f.text_area :content,
+                  rows: 3,
+                  placeholder: "コメントを入力してください...",
+                  class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md p-2" %>
+          </div>
+          <div class="text-right">
+            <%= f.submit "コメントする",
+                  class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="bg-gray-100 p-4 rounded-md text-center">
+          <p class="text-gray-600">コメントを投稿するには<%= link_to "ログイン", new_user_session_path, class: "text-indigo-600 hover:text-indigo-800 font-medium" %>してください。</p>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- ここにコメント一覧を表示（次のレッスンで実装） -->
+
   </div>
 </div>
